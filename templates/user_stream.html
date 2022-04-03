@@ -39,7 +39,7 @@
 			<div class="grid-100">
 				<h5>Пол: {{user.gender}}</h5>
 				<h5>Возраст: {{user.age}}</h5>
-				<h5>Хобби: </h5>
+				<h5>Интересы: </h5>
                 {% for hobby in user.get_hobbies() %}
                     <div>{{ hobby.name }}</div>
                 {% endfor %}
