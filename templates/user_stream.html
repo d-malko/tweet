@@ -1,0 +1,53 @@
+{% extends "stream.html" %}
+
+{% block content %}
+
+	<div class="row">
+        <div class="grid-33">
+			<h2>Пользователь: {{user.username}} {{ user.second_name}}</h2>
+			<h2>Электронная почта: {{user.email}}</h2>
+        </div>
+		<div class="grid-50">
+			<div class="grid-33">
+				<h5>Посты</h5>
+				<p>{{ user.posts|length }}</p>
+			</div>
+			<div class="grid-33">
+				<h5>Подписчики</h5>
+				<p>{{ user.followers()|length }}</p>
+			</div>
+			<div class="grid-33">
+				<h5>Подписан</h5>
+				<p>{{ user.following()|length }}</p>
+			</div>
+		</div>
+		<div class="grid-25">
+			{% if current_user.is_authenticated %}
+				{% if user != current_user %}
+					{% if not user.username in current_user.following() %}
+						<a href="{{ url_for('follow', username = user.username) }}" class="small">Подписаться</a>
+					{% else %}
+						<a href="{{ url_for('unfollow', username = user.username) }}" class="small">Отказаться от подписки</a>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		</div>
+
+	</div>
+    <div class="row">
+    <div class="grid-33">
+			<div class="grid-100">
+				<h5>Пол: {{user.gender}}</h5>
+				<h5>Возраст: {{user.age}}</h5>
+				<h5>Хобби: </h5>
+                {% for hobby in user.get_hobbies() %}
+                    <div>{{ hobby.name }}</div>
+                {% endfor %}
+
+        </div>
+    </div>
+    </div>
+
+
+{{ super() }}
+{% endblock %}

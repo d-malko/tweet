@@ -1,0 +1,9 @@
+email_validator
+configparser
+flask
+flask-login
+flask-bcrypt
+flask_mysqldb
+flask-wtf
+peewee
+gunicorn

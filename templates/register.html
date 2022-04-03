@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% from 'macros.html' import render_field %}
+
+{% block content %}
+<form method="POST" action="" class="form">
+    {{ form.csrf_token }}
+	{{ form.hidden_tag() }}
+	{%for field in form%}
+		{%  if field.name not in ["gender", "hobbies"] %}
+            {{render_field(field)}}
+        {% else %}
+            <div>{{ field.label }}</div>
+            {{render_field(field)}}
+        {% endif %}
+
+	{%endfor%}
+	<button type="submit" id="submit">Регистрация</button>
+</form>
+{% endblock %}
